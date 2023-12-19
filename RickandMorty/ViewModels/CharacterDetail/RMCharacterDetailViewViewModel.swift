@@ -27,9 +27,9 @@ final class RMCharacterDetailViewViewModel {
     }
     public func setUpSections() {
         sections = [
-            .photo(viewModel: .init(imageUrl: <#T##URL?#>)),
+            .photo(viewModel: .init(imageUrl: URL)),
             .information(viewModel: [
-                .init(),
+                .init(value: "dsf", title: "svf"),
                 .init(),
                 .init(),
                 .init()
