@@ -82,7 +82,7 @@ final class RMRequest {
                 }
                 
                 if let rmEndpoint = RMEndpoint(rawValue: endpointString) {
-                    self.init(endpoint: rmEndpoint, pathComponenets: pathComponenets, queryParameters: <#T##[URLQueryItem]#>)
+                    self.init(endpoint: rmEndpoint, pathComponenets: pathComponenets, queryParameters: [URLQueryItem(name: "name", value: "rick")])
                     return
                 }
             }
@@ -103,7 +103,7 @@ final class RMRequest {
                                         value: parts[1])
                 })
                 if let rmEndpoint = RMEndpoint(rawValue: endpointString) {
-                    self.init(endpoint: rmEndpoint, pathComponenets: <#T##[String]#>, queryParameters: queryItems)
+                    self.init(endpoint: rmEndpoint, pathComponenets: ["hey"], queryParameters: queryItems)
                     return
                 }
             }
