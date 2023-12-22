@@ -195,6 +195,7 @@
 				6A21F8042B2C69E500A38436 /* APIClient */,
 				6A21F8032B2C69DC00A38436 /* ViewModels */,
 				6A21F8022B2C69D600A38436 /* Views */,
+				6A88CEA92B2E3C2E005C4243 /* RMFooterLoadingCollectionReusableView.swift */,
 				6A21F8012B2C69CF00A38436 /* Models */,
 				6A21F8002B2C69C500A38436 /* Controllers */,
 				6A21F7DE2B2C68DB00A38436 /* Info.plist */,
@@ -240,7 +241,6 @@
 		6A21F8022B2C69D600A38436 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				6A88CEA92B2E3C2E005C4243 /* RMFooterLoadingCollectionReusableView.swift */,
 				6A08793E2B31A1F100549A0D /* CharacterDetails */,
 				6A08793F2B31A21B00549A0D /* Character */,
 			);

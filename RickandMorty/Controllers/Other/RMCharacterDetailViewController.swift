@@ -86,7 +86,6 @@ extension RMCharacterDetailViewController: UICollectionViewDelegate, UICollectio
                 fatalError()
             }
             cell.configure(with: viewModel)
-            cell.backgroundColor = .systemMint
             return cell
          
         case .information(let viewModel):
@@ -100,8 +99,8 @@ extension RMCharacterDetailViewController: UICollectionViewDelegate, UICollectio
             guard  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMCharacterEpisodeCollectionViewCell.cellIdentifier, for: indexPath) as? RMCharacterEpisodeCollectionViewCell else {
                 fatalError()
             }
-            cell.configure(with: viewModel[indexPath.row])
-            cell.backgroundColor = .orange
+            let viewModel = viewModel[indexPath.row]
+            cell.configure(with: viewModel)
             return cell
         }
     }
