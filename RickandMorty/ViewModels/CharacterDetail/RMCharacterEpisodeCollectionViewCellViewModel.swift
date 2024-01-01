@@ -1,8 +1,8 @@
 //
-//  RMCharacterEpisodeViewCellViewModel.swift
+//  RMCharacterEpisodeCollectionViewCellViewModel.swift
 //  RickandMorty
 //
-//  Created by Saadet Şimşek on 19/12/2023.
+//  Created by Saadet Şimşek on 25/12/2023.
 //
 
 import Foundation
@@ -69,5 +69,14 @@ final class RMCharacterEpisodeCollectionViewCellViewModel {
                 print(String(describing: failure))
             }
         }
+    }
+}
+extension RMCharacterEpisodeCollectionViewCellViewModel: Equatable, Hashable {
+ 
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.episodeDataUrl?.absoluteString ?? "")
+    }
+    static func == (lhs: RMCharacterEpisodeCollectionViewCellViewModel, rhs: RMCharacterEpisodeCollectionViewCellViewModel) -> Bool {
+        return lhs.hashValue == rhs.hashValue
     }
 }
