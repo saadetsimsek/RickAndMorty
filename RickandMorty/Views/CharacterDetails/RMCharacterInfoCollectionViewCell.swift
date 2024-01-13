@@ -85,7 +85,6 @@ final class RMCharacterInfoCollectionViewCell: UICollectionViewCell {
             
         ])
         
-        valueLabel.backgroundColor = .red
     }
     
     override func prepareForReuse() {

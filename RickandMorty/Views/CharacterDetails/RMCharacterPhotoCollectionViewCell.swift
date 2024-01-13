@@ -22,6 +22,7 @@ final class RMCharacterPhotoCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(imageView)
+        setUpConstraits()
     }
     
     required init?(coder: NSCoder) {

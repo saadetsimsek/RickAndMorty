@@ -11,6 +11,10 @@ import UIKit
 final class RMCharacterDetailViewViewModel {
     private let character: RMCharacter
     
+    public var episode: [String]{
+        character.episode
+    }
+    
     enum SectionType {
         case photo(viewModel: RMCharacterPhotoCollectionViewCellViewModel)
         case information(viewModel: [RMCharacterInfoCollectionViewCellViewModel])
@@ -53,6 +57,7 @@ final class RMCharacterDetailViewViewModel {
     }
     
     //MARK: - lAYOUT
+    
     public func createPhotoSectionLayout()-> NSCollectionLayoutSection{
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                                              heightDimension: .fractionalHeight(1.0)))
@@ -68,6 +73,8 @@ final class RMCharacterDetailViewViewModel {
         
         return section
     }
+    
+    
     public func createInfoSectionLayout()-> NSCollectionLayoutSection{
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
                                                                              heightDimension: .fractionalHeight(1.0)))
@@ -83,6 +90,8 @@ final class RMCharacterDetailViewViewModel {
         
         return section
     }
+    
+    
     public func createEpisodeSectionLayout()-> NSCollectionLayoutSection{
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                                              heightDimension: .fractionalHeight(1.0)))

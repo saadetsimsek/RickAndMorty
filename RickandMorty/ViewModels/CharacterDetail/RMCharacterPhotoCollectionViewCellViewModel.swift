@@ -16,9 +16,9 @@ final class RMCharacterPhotoCollectionViewCellViewModel {
     
     public func fetchImage(completion: @escaping(Result<Data, Error>)-> Void){
         guard let imageUrl = imageUrl else {
-            return completion(.failure(URLError(.badURL)))
+            completion(.failure(URLError(.badURL)))
+            return
         }
-        
         
         RMImageLoader.shared.downloadImage(imageUrl, completion: completion)
     }

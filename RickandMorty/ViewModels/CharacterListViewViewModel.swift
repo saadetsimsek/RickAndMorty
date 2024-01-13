@@ -65,7 +65,7 @@ final class CharacterListViewViewModel: NSObject{
         }
         isLoadingMoreCharacters = true
         guard let request = RMRequest(url: url) else {
-            print("failed to create request")
+            isLoadingMoreCharacters = false
             return
         }
         //fetch characters
@@ -87,9 +87,8 @@ final class CharacterListViewViewModel: NSObject{
                 let indexPathToAdd: [IndexPath] = Array(startingIndex..<(startingIndex + newCount)).compactMap({
                     return IndexPath(row: $0, section: 0)
                 })
-            
+            strongSelf.characters.append(contentsOf: moreresults)
                 
-                strongSelf.characters.append(contentsOf: moreresults)
                 DispatchQueue.main.async {
                     strongSelf.delegate?.didLoadMoreCharacters(with: indexPathToAdd)
                     strongSelf.isLoadingMoreCharacters = false
@@ -140,6 +139,7 @@ extension CharacterListViewViewModel: UICollectionViewDataSource, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+       
         let bounds = UIScreen.main.bounds
         let width = (bounds.width-30)/2
         return CGSize(width: width, height: width * 1.5)

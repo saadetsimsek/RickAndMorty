@@ -27,12 +27,12 @@ final class RMCharacterDetailView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .systemBackground
         
-        addConstraits()
-        
         let collectionView = createCollectionView()
         self.collectionView = collectionView
         
-        addSubviews(collectionView, spinner)
+        addSubview(collectionView)
+        addSubview(spinner)
+        addConstraits()
     }
     
     required init?(coder: NSCoder) {
@@ -86,9 +86,5 @@ final class RMCharacterDetailView: UIView {
         case .episodes:
             return viewModel.createEpisodeSectionLayout()
         }
-   
     }
-    
-
-  
 }

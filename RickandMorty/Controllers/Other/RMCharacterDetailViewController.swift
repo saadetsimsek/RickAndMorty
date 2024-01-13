@@ -13,6 +13,8 @@ class RMCharacterDetailViewController: UIViewController {
     
     private let detailView: RMCharacterDetailView
     
+    //MARK: - Init
+    
     init(viewModel: RMCharacterDetailViewViewModel) {
         self.viewModel = viewModel
         self.detailView = RMCharacterDetailView(frame: .zero, viewModel: viewModel)
@@ -69,7 +71,7 @@ extension RMCharacterDetailViewController: UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let sectionTypes = viewModel.sections[section]
         switch sectionTypes {
-        case .photo(let viewModel):
+        case .photo:
             return 1
         case .information(let viewModel):
             return viewModel.count
@@ -93,7 +95,6 @@ extension RMCharacterDetailViewController: UICollectionViewDelegate, UICollectio
                 fatalError()
             }
             cell.configure(with: viewModel[indexPath.row])
-            cell.backgroundColor = .systemBlue
             return cell
         case .episodes(let viewModel):
             guard  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMCharacterEpisodeCollectionViewCell.cellIdentifier, for: indexPath) as? RMCharacterEpisodeCollectionViewCell else {
@@ -102,6 +103,19 @@ extension RMCharacterDetailViewController: UICollectionViewDelegate, UICollectio
             let viewModel = viewModel[indexPath.row]
             cell.configure(with: viewModel)
             return cell
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let sectionType = viewModel.sections[indexPath.section]
+        switch sectionType {
+        case .photo, .information:
+            break
+        case .episodes:
+            let episodes = self.viewModel.episode
+            let selection = episodes[indexPath.row]
+            let vc = RMEpisodeDetailViewController(url: URL(string: selection))
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

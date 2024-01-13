@@ -46,7 +46,6 @@ final class CharacterListView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .systemBackground
         addSubview(spinner)
         addSubview(collectionView)
         
@@ -57,10 +56,9 @@ final class CharacterListView: UIView {
         viewModel.delegate = self
         
         viewModel.fetchCharacters()
-        
-
-        
+    
         setUpCollectionView()
+        
         
     }
     
@@ -86,27 +84,18 @@ final class CharacterListView: UIView {
         collectionView.dataSource = viewModel
         collectionView.delegate = viewModel
         
-   
     }
     
 }
 
 extension CharacterListView: CharacterListViewViewModelDelegate {
-    func didLoadMoreCharacters(with newIndexPath: [IndexPath]) {
-        collectionView.performBatchUpdates{
-        
-            self.collectionView.insertItems(at: newIndexPath)
-        }
-    }
     
     func didSelectCharacter(_ character: RMCharacter) {
         delegate?.characterListView(self, didSelectCharacter: character)
     }
-    
     func didLoadInitialCharacters() {
 
         spinner.stopAnimating()
-            
         collectionView.isHidden = false
         collectionView.reloadData() // initial fetch
         UIView.animate(withDuration: 0.4){
@@ -115,5 +104,11 @@ extension CharacterListView: CharacterListViewViewModelDelegate {
         
     }
     
+    func didLoadMoreCharacters(with newIndexPath: [IndexPath]) {
+        collectionView.performBatchUpdates{
+        
+            self.collectionView.insertItems(at: newIndexPath)
+        }
+    }
     
 }

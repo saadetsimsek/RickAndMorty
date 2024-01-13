@@ -5,7 +5,7 @@
 //  Created by Saadet Şimşek on 24/12/2023.
 //
 
-import Foundation
+
 import UIKit
 
 protocol EpisodeListViewViewModelDelegate: AnyObject{
@@ -19,29 +19,39 @@ final class RMEpisodeListViewViewModel: NSObject{
     
     public weak var delegate: EpisodeListViewViewModelDelegate?
     
-    
-    
     private var isLoadingMoreEpisodes = false
+    
+    private let borderColor: [UIColor] = [
+        .systemRed,
+        .systemBlue,
+        .systemGreen,
+        .systemPink,
+        .systemYellow,
+        .systemOrange,
+        .systemMint,
+        .systemPurple
+    ]
     
     private var episodes : [RMEpisode] = [] {
         
         didSet {
             for episode in episodes {
-                let viewModel = RMCharacterEpisodeCollectionViewCellViewModel(episodeDataUrl: URL(string: episode.url))
-                if !cellViewModels.contains(viewModel) {
+                let viewModel = RMCharacterEpisodeCollectionViewCellViewModel(episodeDataUrl: URL(string: episode.url),
+                                                                              borderColor: borderColor.randomElement() ?? .systemBlue)
+                if !cellViewModels.contains(viewModel){
                     cellViewModels.append(viewModel)
                 }
             }
         }
     }
     
-    private var cellViewModels: [RMCharacterEpisodeCollectionViewCell] = []
+    private var cellViewModels: [RMCharacterEpisodeCollectionViewCellViewModel] = []
     
     private var apiInfo: RMGetAllEpisodesResponse.Info? = nil
     
     // fetch initial set of episodes (20)
    public func fetchEpisodes(){
-        RMService.shared.execute(.listEpisodesRequests, expecting: RMGetAllEpisodesResponse.self) { [weak self] result in
+       RMService.shared.execute(.listEpisodesRequest, expecting: RMGetAllEpisodesResponse.self) { [weak self] result in
             switch result {
             case .success(let responseModel):
                 let results = responseModel.results
@@ -64,7 +74,7 @@ final class RMEpisodeListViewViewModel: NSObject{
         }
         isLoadingMoreEpisodes = true
         guard let request = RMRequest(url: url) else {
-            print("failed to create request")
+            isLoadingMoreEpisodes = false
             return
         }
         //fetch episodes
@@ -87,8 +97,8 @@ final class RMEpisodeListViewViewModel: NSObject{
                     return IndexPath(row: $0, section: 0)
                 })
             
-                
                 strongSelf.episodes.append(contentsOf: moreresults)
+                
                 DispatchQueue.main.async {
                     strongSelf.delegate?.didLoadMoreEpisode(with: indexPathToAdd)
                     strongSelf.isLoadingMoreEpisodes = false
@@ -116,6 +126,7 @@ extension RMEpisodeListViewViewModel: UICollectionViewDataSource, UICollectionVi
             fatalError("Unsupported Cell")
         }
         cell.configure(with: cellViewModels[indexPath.row])
+        //cell.configure(with: cellViewModels[indexPath.row])
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -139,9 +150,9 @@ extension RMEpisodeListViewViewModel: UICollectionViewDataSource, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let bounds = UIScreen.main.bounds
-        let width = (bounds.width-30)/2
-        return CGSize(width: width, height: width * 0.8)
+        let bounds = collectionView.bounds
+        let width = bounds.width-20
+        return CGSize(width: width, height: 100)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

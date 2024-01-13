@@ -16,7 +16,6 @@ final class RMCharacterInfoCollectionViewCellViewModel {
     
     static let dateFormatter: DateFormatter = {
         //Format
-        
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.SSSSZ"
         formatter.timeZone = .current
@@ -28,6 +27,7 @@ final class RMCharacterInfoCollectionViewCellViewModel {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .short
+        formatter.timeZone = .current
         return formatter
     }()
     
