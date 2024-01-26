@@ -48,8 +48,8 @@ final class RMCharacterInfoCollectionViewCell: UICollectionViewCell {
         contentView.backgroundColor = .tertiarySystemBackground
         contentView.layer.cornerRadius = 8
         contentView.layer.masksToBounds = true
-        contentView.addSubviews(valueLabel, titleLabel, iconImageView)
-        contentView.addSubview(titleContainerView)
+        contentView.addSubviews(titleContainerView, valueLabel, iconImageView)
+        titleContainerView.addSubview(titleLabel)
         
         setUpConstraits()
     }

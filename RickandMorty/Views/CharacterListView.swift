@@ -46,8 +46,9 @@ final class CharacterListView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
-        addSubview(spinner)
+        
         addSubview(collectionView)
+        addSubview(spinner)
         
         addConstraints()
         
@@ -76,7 +77,7 @@ final class CharacterListView: UIView {
             collectionView.topAnchor.constraint(equalTo: topAnchor),
             collectionView.leftAnchor.constraint(equalTo: leftAnchor),
             collectionView.rightAnchor.constraint(equalTo: rightAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }
     

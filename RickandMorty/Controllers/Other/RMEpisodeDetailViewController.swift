@@ -27,15 +27,19 @@ class RMEpisodeDetailViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         title = "Episode"
         view.backgroundColor = .systemBackground
         view.addSubview(detailView)
+        
         addConstraits()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, 
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action,
                                                             target: self,
                                                             action: #selector(didTapShare))
+    
+        viewModel.delegate = self
+        viewModel.fetchEpisodeData()
     }
     
     @objc private func didTapShare(){
@@ -51,4 +55,12 @@ class RMEpisodeDetailViewController: UIViewController{
         ])
     }
 
+}
+
+//MARK: -Delegate
+extension RMEpisodeDetailViewController: RMEpisodeDetailViewViewModelDelegate{
+    func didFetchEpisodeDetails() {
+        detailView.configure(with: viewModel)
+    }
+    
 }

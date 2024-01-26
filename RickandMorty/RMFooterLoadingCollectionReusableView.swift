@@ -22,6 +22,7 @@ final class RMFooterLoadingCollectionReusableView: UICollectionReusableView {
         super.init(frame: frame)
         backgroundColor = .systemBackground
         addSubview(spinner)
+        addConstraits()
     }
     
     required init?(coder: NSCoder) {
