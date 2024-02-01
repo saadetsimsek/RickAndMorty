@@ -31,6 +31,7 @@ class RMEpisodeDetailViewController: UIViewController{
         title = "Episode"
         view.backgroundColor = .systemBackground
         view.addSubview(detailView)
+        detailView.delegate = self
         
         addConstraits()
         
@@ -57,10 +58,22 @@ class RMEpisodeDetailViewController: UIViewController{
 
 }
 
-//MARK: -Delegate
+//MARK: - View Model Delegate
 extension RMEpisodeDetailViewController: RMEpisodeDetailViewViewModelDelegate{
     func didFetchEpisodeDetails() {
         detailView.configure(with: viewModel)
     }
+    
+}
+
+//MARK: - View Delegate
+extension RMEpisodeDetailViewController: RMEpisodeDetailViewDelegate{
+    func rmEpisodeDetailView(_ detailView: RMEpisodeDetailView, didSelect character: RMCharacter) {
+        let vc = RMCharacterDetailViewController(viewModel: .init(character: character))
+        vc.title = character.name
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
 }

@@ -68,8 +68,8 @@ final class RMCharacterInfoCollectionViewCell: UICollectionViewCell {
          
             titleLabel.leftAnchor.constraint(equalTo: titleContainerView.leftAnchor),
             titleLabel.rightAnchor.constraint(equalTo: titleContainerView.rightAnchor),
-            titleLabel.bottomAnchor.constraint(equalTo: titleContainerView.bottomAnchor),
             titleLabel.topAnchor.constraint(equalTo: titleContainerView.topAnchor),
+            titleLabel.bottomAnchor.constraint(equalTo: titleContainerView.bottomAnchor),
             
             
             iconImageView.heightAnchor.constraint(equalToConstant: 30),

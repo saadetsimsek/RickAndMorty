@@ -20,6 +20,8 @@ final class RMCharacterDetailView: UIView {
         spinner.translatesAutoresizingMaskIntoConstraints = false
         return spinner
     }()
+    
+    //MARK: - İnit
 
     init(frame: CGRect, viewModel: RMCharacterDetailViewViewModel) {
         self.viewModel = viewModel
@@ -36,7 +38,7 @@ final class RMCharacterDetailView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError("Unsupporten")
     }
     
     private func addConstraits(){

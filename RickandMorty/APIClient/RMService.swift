@@ -26,8 +26,7 @@ final class RMService {
     public func execute<T: Codable>(_ request: RMRequest,
                                     expecting type: T.Type,
                                     completion: @escaping(Result<T, Error>) -> Void) {
-        if let cacheData = cacheManager.cacheResponse(for: request.endpoint
-                                                      ,
+        if let cacheData = cacheManager.cacheResponse(for: request.endpoint,
                                                       url: request.url){
             print("Using cached API Response")
             do{

@@ -19,7 +19,6 @@ final class RMImageLoader {
    public func downloadImage(_ url: URL, completion: @escaping (Result<Data, Error>) -> Void){
        let key = url.absoluteString as NSString
        if let data = imageDataCache.object(forKey: key){
-           
            completion(.success(data as Data)) // NSDATA == Data | NSString = String
            return
        }
@@ -30,7 +29,7 @@ final class RMImageLoader {
                 completion(.failure(error ?? URLError(.badServerResponse)))
                 return
             }
-            let key = url.absoluteString as NSString
+       //     let key = url.absoluteString as NSString
             let value = data as NSData
             self?.imageDataCache.setObject(value, forKey: key)
             completion(.success(data))

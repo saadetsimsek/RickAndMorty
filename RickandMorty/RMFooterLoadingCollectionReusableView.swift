@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 final class RMFooterLoadingCollectionReusableView: UICollectionReusableView {
         
     static let identifier = "RMFooterLoadingCollectionReusableView"

@@ -73,10 +73,10 @@ extension RMCharacterDetailViewController: UICollectionViewDelegate, UICollectio
         switch sectionTypes {
         case .photo:
             return 1
-        case .information(let viewModel):
-            return viewModel.count
-        case .episodes(let viewModel):
-            return viewModel.count
+        case .information(let viewModels):
+            return viewModels.count
+        case .episodes(let viewModels):
+            return viewModels.count
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

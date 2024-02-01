@@ -5,7 +5,6 @@
 //  Created by Saadet Şimşek on 19/12/2023.
 //
 
-import Foundation
 import UIKit
 
 final class RMCharacterInfoCollectionViewCellViewModel {
@@ -129,8 +128,6 @@ final class RMCharacterInfoCollectionViewCellViewModel {
           value: String){
         self.value = value
         self.type = type
-        //dflmgvçfmgçlerfg
-        
-        
+    
     }
 }

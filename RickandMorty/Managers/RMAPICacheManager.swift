@@ -40,6 +40,8 @@ final class RMAPICacheManager{
         let key = url.absoluteString as NSString
         targetCache.setObject(data as NSData, forKey: key)
     }
+
+    
     
     //MARK: - Private
     

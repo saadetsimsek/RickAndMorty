@@ -6,7 +6,9 @@
 //
 
 import UIKit
+import Foundation
 
-final class RMEpisodeInfoCollectionViewCellViewModel: UICollectionViewCell {
-    
+struct RMEpisodeInfoCollectionViewCellViewModel{
+    public let title: String
+    public let value: String
 }

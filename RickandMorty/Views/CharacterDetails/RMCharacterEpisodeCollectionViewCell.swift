@@ -39,8 +39,9 @@ final class RMCharacterEpisodeCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .tertiarySystemBackground
-        contentView.addSubviews(seasonLabel, nameLabel, airDataLabel)
         setUpLayer()
+        contentView.addSubviews(seasonLabel, nameLabel, airDataLabel)
+        setUpConstraits()
     }
     
     required init?(coder: NSCoder) {

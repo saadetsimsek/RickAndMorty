@@ -5,7 +5,7 @@
 //  Created by Saadet Şimşek on 16/12/2023.
 //
 
-import Foundation
+
 import UIKit
 
 final class RMCharacterDetailViewViewModel {
@@ -70,7 +70,6 @@ final class RMCharacterDetailViewViewModel {
                                                                                         heightDimension: .fractionalHeight(0.5)),
                                                      subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
-        
         return section
     }
     
