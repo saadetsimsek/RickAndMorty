@@ -33,8 +33,12 @@ struct RMSettingsView: View {
                 }
                 Text(viewModel.title)
                     .padding(.leading, 10)
+                Spacer() // SwiftUI view'i ve bu düzendeki diğer öğeler arasında boşluk bırakmak için kullanılır.
             }
             .padding(.bottom, 3)
+            .onTapGesture {
+                viewModel.onTapHandler(viewModel.type)
+            }
         }
         
     }
@@ -42,7 +46,9 @@ struct RMSettingsView: View {
 
 #Preview {
     RMSettingsView(viewModel: .init(cellViewModels: RMSettingsOption.allCases.compactMap({
-        return RMSettingsCellViewModel(type: $0)
+        return RMSettingsCellViewModel(type: $0){ option in
+            
+        }
     })))
 }
 
