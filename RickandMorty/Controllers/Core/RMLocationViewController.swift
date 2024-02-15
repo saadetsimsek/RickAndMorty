@@ -17,10 +17,14 @@ final class RMLocationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        primaryView.delegate = self
         view.addSubview(primaryView)
         view.backgroundColor = .systemBackground
         title = "Location"
         addSearchButton()
+        addConstraits()
+        viewModel.delegate = self
+        viewModel.fetchLocations()
         
         
     }
@@ -43,5 +47,19 @@ final class RMLocationViewController: UIViewController {
         
     }
 
-   
+}
+//MARK: - LocationViewModel Delegate
+extension RMLocationViewController: RMLocationViewViewModelDelegate {
+    func didFetchInitialLocations() {
+        primaryView.configure(with: viewModel)
+    }
+}
+
+//MARK: - Locatin view delegate
+extension RMLocationViewController: RMLocationViewDelegate {
+    func rmLocationView(_ locationView: RMLocationView, didSelect location: RMLocation) {
+        <#code#>
+    }
+    
+    
 }
