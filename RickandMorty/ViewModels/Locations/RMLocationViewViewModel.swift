@@ -7,12 +7,20 @@
 
 import Foundation
 
+protocol RMLocationViewViewModelDelegate: AnyObject {
+    func didFetchInitialLocations()
+}
+
 final class RMLocationViewViewModel {
+    
+    weak var delegate: RMLocationViewViewModelDelegate?
     
     private var locations: [RMLocation] = []
     
     //location response info
     //will contain next url, if present
+    
+    private var apiInfo: RMGetAllLocationsResponse.Info?
     
     private var cellViewModels: [String] = []
     
@@ -21,10 +29,14 @@ final class RMLocationViewViewModel {
     }
     
     public func fetchLocations(){
-        RMService.shared.execute(.listLocationRequest, expecting: String.self) { result in
+        RMService.shared.execute(.listLocationRequest, expecting: RMGetAllLocationsResponse.self) {[weak self] result in
             switch result {
             case .success(let model):
-                break
+                self?.apiInfo = model.info
+                self?.locations = model.results
+                DispatchQueue.main.async {
+                    self?.delegate?.didFetchInitialLocations()
+                }
             case .failure(let error):
                 break
             }
