@@ -13,8 +13,10 @@ final class RMLocationViewController: UIViewController {
     private let primaryView = RMLocationView()
     
     private let viewModel = RMLocationViewViewModel()
+    
+    //MARK: - lifecycle
 
-    override func viewDidLoad() {
+    override  func viewDidLoad() {
         super.viewDidLoad()
 
         primaryView.delegate = self
@@ -55,10 +57,12 @@ extension RMLocationViewController: RMLocationViewViewModelDelegate {
     }
 }
 
-//MARK: - Locatin view delegate
+//MARK: - LocatinView delegate
 extension RMLocationViewController: RMLocationViewDelegate {
     func rmLocationView(_ locationView: RMLocationView, didSelect location: RMLocation) {
-        <#code#>
+        let vc = RMLocationDetailViewController(location: location)
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     

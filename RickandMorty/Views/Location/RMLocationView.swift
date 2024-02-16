@@ -83,9 +83,6 @@ final class RMLocationView: UIView {
 }
 
 extension RMLocationView: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel?.cellViewModels.count ?? 0
