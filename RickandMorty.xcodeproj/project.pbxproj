@@ -14,6 +14,7 @@
 		6A08794A2B31A30000549A0D /* RMCharacterPhotoCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0879492B31A30000549A0D /* RMCharacterPhotoCollectionViewCellViewModel.swift */; };
 		6A12F0102B6839C9006FF60B /* RMEpisodeInfoCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A12F00F2B6839C9006FF60B /* RMEpisodeInfoCollectionViewCellViewModel.swift */; };
 		6A12F0122B6840C2006FF60B /* RMEpisodeInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A12F0112B6840C2006FF60B /* RMEpisodeInfoCollectionViewCell.swift */; };
+		6A14F03A2B827DC0000CF2F2 /* RMSearchOptionPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A14F0392B827DC0000CF2F2 /* RMSearchOptionPickerViewController.swift */; };
 		6A1AA1B12B2C983700FF1B8A /* RMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1AA1B02B2C983700FF1B8A /* RMService.swift */; };
 		6A1AA1B32B2C984500FF1B8A /* RMRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1AA1B22B2C984500FF1B8A /* RMRequest.swift */; };
 		6A1AA1B52B2C993C00FF1B8A /* RMEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1AA1B42B2C993C00FF1B8A /* RMEndpoint.swift */; };
@@ -101,6 +102,7 @@
 		6A0879492B31A30000549A0D /* RMCharacterPhotoCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMCharacterPhotoCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		6A12F00F2B6839C9006FF60B /* RMEpisodeInfoCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMEpisodeInfoCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		6A12F0112B6840C2006FF60B /* RMEpisodeInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMEpisodeInfoCollectionViewCell.swift; sourceTree = "<group>"; };
+		6A14F0392B827DC0000CF2F2 /* RMSearchOptionPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMSearchOptionPickerViewController.swift; sourceTree = "<group>"; };
 		6A1AA1B02B2C983700FF1B8A /* RMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMService.swift; sourceTree = "<group>"; };
 		6A1AA1B22B2C984500FF1B8A /* RMRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMRequest.swift; sourceTree = "<group>"; };
 		6A1AA1B42B2C993C00FF1B8A /* RMEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMEndpoint.swift; sourceTree = "<group>"; };
@@ -230,6 +232,15 @@
 				6A12F0112B6840C2006FF60B /* RMEpisodeInfoCollectionViewCell.swift */,
 			);
 			path = "Episode Details";
+			sourceTree = "<group>";
+		};
+		6A14F03B2B827FAD000CF2F2 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				6A14F0392B827DC0000CF2F2 /* RMSearchOptionPickerViewController.swift */,
+				6A6F26C52B42F46A00E1F0DB /* RMSearchViewController.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		6A21F7C42B2C68DA00A38436 = {
@@ -379,9 +390,9 @@
 		6A21F8102B2C6D2700A38436 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				6A14F03B2B827FAD000CF2F2 /* Search */,
 				6AB717412B2E27AA0071C069 /* RMCharacterDetailViewController.swift */,
 				6AD36B362B384EF000479804 /* RMEpisodeDetailViewController.swift */,
-				6A6F26C52B42F46A00E1F0DB /* RMSearchViewController.swift */,
 				6A38CCDE2B7E23C500EA3684 /* RMLocationDetailViewController.swift */,
 			);
 			path = Other;
@@ -669,6 +680,7 @@
 				6A08794A2B31A30000549A0D /* RMCharacterPhotoCollectionViewCellViewModel.swift in Sources */,
 				6A1AA1B52B2C993C00FF1B8A /* RMEndpoint.swift in Sources */,
 				6A29669D2B7F5316000542A9 /* RMLocationDetailView.swift in Sources */,
+				6A14F03A2B827DC0000CF2F2 /* RMSearchOptionPickerViewController.swift in Sources */,
 				6A9B8B1B2B7D3B74001AFBD1 /* RMLocationTableViewCellViewModel.swift in Sources */,
 				6AD36B372B384EF000479804 /* RMEpisodeDetailViewController.swift in Sources */,
 				6A8F625B2B38B2D700E203B0 /* RMEpisodeDetailView.swift in Sources */,

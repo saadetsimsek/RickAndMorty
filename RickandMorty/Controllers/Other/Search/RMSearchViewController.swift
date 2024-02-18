@@ -90,7 +90,9 @@ final class RMSearchViewController: UIViewController {
 
 extension RMSearchViewController: RMSearchViewDelegate {
     func rmSearchView(_ searchView: RMSearchView, didSelectOption option: RMSearchInputViewViewModel.DynamicOption) {
-        let vc = RMSearchOptionPickerViewController()
+        let vc = RMSearchOptionPickerViewController(option: option) { selection in
+            print("did select \(selection)")
+        }
         vc.sheetPresentationController?.detents = [.medium()]//Yani, kullanıcı sayfayı açtığında veya kapatırken, sayfanın ekranın ortasında yer alacağını belirtir.Uyguamada search- status(dynamicoptiona) basıldığında aktifleşir aktifleşir
         vc.sheetPresentationController?.prefersGrabberVisible = true
         present(vc, animated: true)
