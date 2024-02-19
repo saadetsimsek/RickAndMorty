@@ -45,10 +45,11 @@ final class RMSearchViewViewModel{
         //create Request based on filters
         //status= alive
         
-        searchText = "Rick"
+        print("Search text: \(searchText)")
+        
         //build argumants
         var queryParams: [URLQueryItem] = [
-            URLQueryItem(name: "name", value: searchText)
+            URLQueryItem(name: "name", value: searchText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))
             ]
         //Add options
         queryParams.append(contentsOf: optionMap.enumerated().compactMap({_, element in
