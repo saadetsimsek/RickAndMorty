@@ -24,6 +24,8 @@ final class RMSearchViewViewModel{
     
     private var searchResultHandler: ((RMSearchResultViewModel)-> Void)?
     
+    private var noResultsHandler: (() -> Void)?
+    
     //MARK: -Init
     init(config: RMSearchViewController.Config){
         self.config = config
@@ -39,6 +41,18 @@ final class RMSearchViewViewModel{
     
     public func registerOptionChangeBlock(_ block: @escaping ((RMSearchInputViewViewModel.DynamicOption, String)) -> Void){
         self.optionMapUpdateBlock = block
+    }
+    
+    public func registerSearchResultHandler(_ block: @escaping (RMSearchResultViewModel) -> Void){
+        self.searchResultHandler = block
+    }
+    
+    public func registerNoResultsHandler(_ block: @escaping ()-> Void){
+        self.noResultsHandler = block
+    }
+    
+    public func set(query text: String){
+        self.searchText = text
     }
     
     public func executeSearch(){
@@ -82,7 +96,7 @@ final class RMSearchViewViewModel{
                 //episode, characters: Collectionview, location: Tableview
                 self?.processSearchResults(model: model)
             case .failure:
-                print("Failed to get results")
+                self?.handleNoResults()
                 break
             }
         }
@@ -111,14 +125,13 @@ final class RMSearchViewViewModel{
         }
         else{
             //fallback error
+            handleNoResults()
         }
     }
     
-    public func registerSearchResultHandler(_ block: @escaping (RMSearchResultViewModel) -> Void){
-        self.searchResultHandler = block
+    private func handleNoResults(){
+        noResultsHandler?()
     }
     
-    public func set(query text: String){
-        self.searchText = text
-    }
+  
 }
