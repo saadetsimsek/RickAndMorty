@@ -6,3 +6,15 @@
 //
 
 import Foundation
+
+/*protocol RMSearchResultsRepresentable{
+    associatedtype ResultType
+    
+    var results: [ResultType] { get }
+}
+*/
+enum RMSearchResultViewModel{
+    case characters([RMCharacterCollectionViewCellViewModel])
+    case episodes([RMCharacterEpisodeCollectionViewCellViewModel])
+    case locations([RMLocationTableViewCellViewModel])
+}
