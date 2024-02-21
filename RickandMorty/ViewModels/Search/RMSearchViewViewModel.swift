@@ -26,6 +26,8 @@ final class RMSearchViewViewModel{
     
     private var noResultsHandler: (() -> Void)?
     
+    private var searchResultModel: Codable?
+    
     //MARK: -Init
     init(config: RMSearchViewController.Config){
         self.config = config
@@ -88,6 +90,13 @@ final class RMSearchViewViewModel{
         
     }
     
+    public func locationSearchResult(at index: Int) -> RMLocation? {
+        guard let searchModel = searchResultModel as? RMGetAllLocationsResponse else{
+            return nil
+        }
+        return searchModel.results[index]
+    }
+    
     private func makeSearchAPICall<T: Codable>(_ type: T.Type, request: RMRequest){
         RMService.shared.execute(request, expecting: RMGetAllLocationsResponse.self) { [weak self] result in
             //notify view of results, no results, or error
@@ -121,6 +130,7 @@ final class RMSearchViewViewModel{
             }))
         }
         if let results = resultsVM{
+            self.searchResultModel = model
             self.searchResultHandler?(results)
         }
         else{
