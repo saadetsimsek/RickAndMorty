@@ -48,6 +48,8 @@ final class RMSearchResultsView: UIView {
     
     
     private var locationCellViewModel: [RMLocationTableViewCellViewModel] = []
+    
+    private var collectionViewCellViewModels: [any Hashable] = []
 
     //MARK: -Init
     override init(frame: CGRect) {
@@ -67,8 +69,10 @@ final class RMSearchResultsView: UIView {
         
         switch viewModel {
         case .characters(let viewModels):
+            self.collectionViewCellViewModels = viewModels
             setUpCollectionView()
         case .episodes(let viewModels):
+            self.collectionViewCellViewModels = viewModels
             setUpCollectionView()
         case .locations(let viewModels):
             setUpTableView(viewModels: viewModels)
@@ -79,6 +83,10 @@ final class RMSearchResultsView: UIView {
         self.tableView.isHidden = true
         self.collectionView.isHidden = false
         collectionView.backgroundColor = .red
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
         collectionView.reloadData()
     }
     
@@ -130,3 +138,50 @@ extension RMSearchResultsView: UITableViewDelegate, UITableViewDataSource{
     }
 }
 
+extension RMSearchResultsView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return collectionViewCellViewModels.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        // character / episode
+        
+        let currentViewModel = collectionViewCellViewModels[indexPath.row]
+        if let characterVM = currentViewModel as? RMCharacterCollectionViewCellViewModel {
+            //character cell
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMCharacterCollectionViewCell.cellIdentifier, for: indexPath) as? RMCharacterCollectionViewCell else {
+                fatalError()
+            }
+            cell.configure(with: characterVM)
+            return cell
+        }
+        
+        //episode
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMCharacterEpisodeCollectionViewCell.cellIdentifier, for: indexPath) as? RMCharacterEpisodeCollectionViewCell else{
+            fatalError()
+        }
+        if let episodeVM = currentViewModel as? RMCharacterEpisodeCollectionViewCellViewModel {
+            cell.configure(with: episodeVM)
+        }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // Handle cell tap
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let currentViewModel = collectionViewCellViewModels[indexPath.row]
+        
+        if currentViewModel is RMCharacterCollectionViewCellViewModel{
+            //character size
+            let width = (bounds.width-30)/2
+            return CGSize(width: width,
+                          height: width * 1.5)
+        }
+        //episode
+        let width = bounds.width-20
+        return CGSize(width: width,
+                      height: 100)
+    }
+}
