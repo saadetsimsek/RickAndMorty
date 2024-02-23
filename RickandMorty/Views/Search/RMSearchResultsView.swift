@@ -238,10 +238,23 @@ extension RMSearchResultsView: UIScrollViewDelegate{
             if offset >= (totalConstentHeight - totalScrollViewFixedHeight - 120){
                 viewModel.fetchAdditionalResults{[weak self] newResults in
                     //Refresh table
-                    self?.tableView.tableFooterView = nil
-                    self?.collectionViewCellViewModels = newResults
+                    guard let strongSelf = self else{
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        strongSelf.tableView.tableFooterView = nil
+                        let originalCount = strongSelf.collectionViewCellViewModels.count
+                        let newCount = (newResults.count - originalCount)
+                        let total = originalCount + newCount
+                        let startingIndex = total - newCount
+                        let indexPathsToAdd: [IndexPath] = Array(startingIndex..<(startingIndex + newCount)).compactMap({
+                            return IndexPath(row: $0, section: 0)
+                        })
+                        print("Should add more result cells for search results \(newResults.count)")
+                        strongSelf.collectionViewCellViewModels = newResults
+                        strongSelf.collectionView.insertItems(at: indexPathsToAdd)
+                    }
                     
-                    print("Should add more result cells for search results")
                 }
             }
             t.invalidate()
@@ -262,14 +275,22 @@ extension RMSearchResultsView: UIScrollViewDelegate{
             let totalScrollViewFixedHeight = scrollView.frame.size.height
 
             if offset >= (totalContentHeight - totalScrollViewFixedHeight - 120) {
-                DispatchQueue.main.async {
-                    self?.showTableLoadingIndicator()
-                }
                 viewModel.fetchAdditionalLocations { [weak self] newResults in
                     // Refresh table
+                    guard let strongSelf = self else{
+                        return
+                    }
+                    strongSelf.tableView.tableFooterView = nil
+                    let originalCount = strongSelf.collectionViewCellViewModels.count
+                    let newCount = newResults.count
+                    let total = originalCount + newCount
+                    let startingIndex = total - newCount
+                    let indexPathsToAdd: [IndexPath] = Array(startingIndex..<(startingIndex + newCount)).compactMap({
+                        return IndexPath(row: $0, section: 0)
+                    })
                     self?.tableView.tableFooterView = nil
                     self?.locationCellViewModels = newResults
-                    self?.tableView.reloadData()
+                    
                 }
             }
             t.invalidate()
