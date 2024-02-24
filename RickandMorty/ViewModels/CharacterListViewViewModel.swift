@@ -140,12 +140,12 @@ extension CharacterListViewViewModel: UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     //TODO: Abstract to extension
-        let isIphone = UIDevice.current.userInterfaceIdiom == .phone
+     //   let isIphone = UIDevice.current.userInterfaceIdiom == .phone //extension kullandık bunun yerine
        
       //  let bounds = UIScreen.main.bounds
         let bounds = collectionView.bounds//farklı cihazlar için bunu kullandık
         let width: CGFloat
-        if isIphone{
+        if UIDevice.isiPhone{
             width = (bounds.width-30)/2
         }
         else{

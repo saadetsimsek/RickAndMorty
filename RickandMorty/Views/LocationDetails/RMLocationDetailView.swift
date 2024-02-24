@@ -124,8 +124,8 @@ extension RMLocationDetailView{
     
     func createCharacterLayout()-> NSCollectionLayoutSection{
         
-        let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.5),
-                                                            heightDimension: .fractionalHeight(1)))
+        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(UIDevice.isiPhone ? 0.5 : 0.20 ),
+                                                                             heightDimension: .fractionalHeight(1.0)))
         item.contentInsets = NSDirectionalEdgeInsets(top: 5,
                                                      leading: 10,
                                                      bottom: 5,
@@ -133,7 +133,7 @@ extension RMLocationDetailView{
         
         let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
                                                                        heightDimension: .absolute(260)),
-                                                     subitems: [item, item])
+                                                     subitems: UIDevice.isiPhone ?  [item, item] : [item, item, item, item])
         let section = NSCollectionLayoutSection(group: group)
         return section
     }
