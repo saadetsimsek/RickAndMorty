@@ -58,7 +58,7 @@ final class RMCharacterCollectionViewCell: UICollectionViewCell {
         contentView.layer.cornerRadius = 8
         contentView.layer.shadowColor = UIColor.label.cgColor
         contentView.layer.cornerRadius = 4
-        contentView.layer.shadowOffset = CGSize(width: -4, height: -4)
+        contentView.layer.shadowOffset = CGSize(width: -4, height: 4)
         contentView.layer.shadowOpacity = 0.3
     }
     
@@ -70,6 +70,7 @@ final class RMCharacterCollectionViewCell: UICollectionViewCell {
             
             statusLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 7),
             statusLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -7),
+            
             nameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 7),
             nameLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -7),
             
@@ -94,7 +95,7 @@ final class RMCharacterCollectionViewCell: UICollectionViewCell {
          */
     }
     
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+   override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         setUpLayer()
     }

@@ -80,7 +80,6 @@ final class RMSearchInputView: UIView {
     }
     
     private func createOptionSelectionViews(options: [RMSearchInputViewViewModel.DynamicOption]){
-        
         let stackView =  createOptionStackView()
         self.stackView = stackView
         for x in 0..<options.count {
@@ -100,7 +99,7 @@ final class RMSearchInputView: UIView {
                                                         .foregroundColor: UIColor.label]), for: .normal)
     //    button.setTitle(option.rawValue, for: .normal)
      //   button.setTitleColor(.label, for: .normal)
-        button.backgroundColor = .secondarySystemBackground
+        button.backgroundColor = .secondarySystemFill
         button.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
         button.tag = tag
         button.layer.cornerRadius = 6

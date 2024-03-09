@@ -31,11 +31,11 @@ final class RMSearchOptionPickerViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
-        view.addSubview(tableView)
         setUpTable()
         
     }
@@ -58,17 +58,17 @@ extension RMSearchOptionPickerViewController: UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let choise = option.choices[indexPath.row]
+        let choice = option.choices[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = choise.uppercased()
+        cell.textLabel?.text = choice.uppercased()
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         //Inform caller of choise
-        let choise = option.choices[indexPath.row]
-        self.selectionBlock(choise)
+        let choice = option.choices[indexPath.row]
+        self.selectionBlock(choice)
         dismiss(animated: true)
     }
 }

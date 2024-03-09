@@ -35,12 +35,14 @@ final class RMSearchResultsView: UIView {
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+      
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.isHidden = true
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(RMCharacterEpisodeCollectionViewCell.self, forCellWithReuseIdentifier: RMCharacterEpisodeCollectionViewCell.cellIdentifier)
         collectionView.register(RMCharacterCollectionViewCell.self, forCellWithReuseIdentifier: RMCharacterCollectionViewCell.cellIdentifier)
+        collectionView.register(RMCharacterEpisodeCollectionViewCell.self, forCellWithReuseIdentifier: RMCharacterEpisodeCollectionViewCell.cellIdentifier)
+      
         //footer for loading
         collectionView.register(RMFooterLoadingCollectionReusableView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
@@ -58,8 +60,8 @@ final class RMSearchResultsView: UIView {
         super.init(frame: frame)
         isHidden = true
         translatesAutoresizingMaskIntoConstraints = false
-        addConstraints()
         addSubviews(tableView, collectionView)
+        addConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -84,7 +86,6 @@ final class RMSearchResultsView: UIView {
     private func setUpCollectionView(){
         self.tableView.isHidden = true
         self.collectionView.isHidden = false
-        collectionView.backgroundColor = .red
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -135,11 +136,12 @@ extension RMSearchResultsView: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let viewModel = locationCellViewModels[indexPath.row]
+       // let viewModel = locationCellViewModels[indexPath.row]
         delagate?.rmSearchResultsView(self, didTapLocationAt: indexPath.row)
     }
 }
 
+//MARK: - Collectionview
 extension RMSearchResultsView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return collectionViewCellViewModels.count
@@ -248,7 +250,7 @@ extension RMSearchResultsView: UIScrollViewDelegate{
             let totalScrollViewFixedHeight = scrollView.frame.size.height
             
             if offset >= (totalConstentHeight - totalScrollViewFixedHeight - 120){
-                viewModel.fetchAdditionalResults{[weak self] newResults in
+                viewModel.fetchAdditionalResults{ [weak self] newResults in
                     //Refresh table
                     guard let strongSelf = self else{
                         return
@@ -262,7 +264,7 @@ extension RMSearchResultsView: UIScrollViewDelegate{
                         let indexPathsToAdd: [IndexPath] = Array(startingIndex..<(startingIndex + newCount)).compactMap({
                             return IndexPath(row: $0, section: 0)
                         })
-                        print("Should add more result cells for search results \(newResults.count)")
+                       // print("Should add more result cells for search results \(newResults.count)")
                         strongSelf.collectionViewCellViewModels = newResults
                         strongSelf.collectionView.insertItems(at: indexPathsToAdd)
                     }
@@ -287,22 +289,14 @@ extension RMSearchResultsView: UIScrollViewDelegate{
             let totalScrollViewFixedHeight = scrollView.frame.size.height
 
             if offset >= (totalContentHeight - totalScrollViewFixedHeight - 120) {
+                DispatchQueue.main.async {
+                    self?.showTableLoadingIndicator()
+                }
                 viewModel.fetchAdditionalLocations { [weak self] newResults in
                     // Refresh table
-                    guard let strongSelf = self else{
-                        return
-                    }
-                    strongSelf.tableView.tableFooterView = nil
-                    let originalCount = strongSelf.collectionViewCellViewModels.count
-                    let newCount = newResults.count
-                    let total = originalCount + newCount
-                    let startingIndex = total - newCount
-                    let indexPathsToAdd: [IndexPath] = Array(startingIndex..<(startingIndex + newCount)).compactMap({
-                        return IndexPath(row: $0, section: 0)
-                    })
                     self?.tableView.tableFooterView = nil
                     self?.locationCellViewModels = newResults
-                    
+                    self?.tableView.reloadData()
                 }
             }
             t.invalidate()

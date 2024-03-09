@@ -42,8 +42,7 @@ final class RMSearchView: UIView {
         super.init(frame: frame)
         backgroundColor = .systemBackground
         translatesAutoresizingMaskIntoConstraints = false
-        
-        addSubviews(noResultsView, searchInputView)
+        addSubviews(resultsView,noResultsView, searchInputView)
         addConstraits()
         
         searchInputView.configure(with: RMSearchInputViewViewModel(type: viewModel.config.type))

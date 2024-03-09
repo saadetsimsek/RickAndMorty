@@ -12,10 +12,10 @@ import UIKit
 //render no results zero state
 //searching / apı call
 
-//configurable controller to search
+///configurable controller to search
 final class RMSearchViewController: UIViewController {
     
-    //configuration for search session
+    ///configuration for search session
     struct Config{
         enum Typee {
             case character // name/ status/ gender
@@ -39,9 +39,9 @@ final class RMSearchViewController: UIViewController {
                 case .character:
                     return "Search Characters"
                 case .episode:
-                    return "Search Location"
-                case .location:
                     return "Search Episode"
+                case .location:
+                    return "Search Location"
                 }
             }
         }
@@ -73,7 +73,6 @@ final class RMSearchViewController: UIViewController {
         view.addSubview(searchView)
         addConstraits()
         
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Search",
                                                             style: .done,
                                                             target: self,
@@ -83,7 +82,7 @@ final class RMSearchViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        searchView.presentKeyboard()
+        searchView.presentKeyboard() // klavye görüntüleme
     }
     
     @objc private func didTapExecuteSearch(){
@@ -99,6 +98,8 @@ final class RMSearchViewController: UIViewController {
         ])
     }
 }
+
+//MARK: - SearchView Delegate
 
 extension RMSearchViewController: RMSearchViewDelegate {
     func rmSearchView(_ searchView: RMSearchView, didSelectOption option: RMSearchInputViewViewModel.DynamicOption) {

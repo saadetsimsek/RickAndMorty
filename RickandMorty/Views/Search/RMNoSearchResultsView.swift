@@ -27,6 +27,7 @@ final class RMNoSearchResultsView: UIView {
         return label
     }()
 
+    //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         isHidden = true

@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+///Interface to relay location view events
 protocol RMLocationViewDelegate : AnyObject {
     func rmLocationView(_ locationView: RMLocationView, didSelect location: RMLocation)
 }
@@ -50,6 +52,8 @@ final class RMLocationView: UIView {
         return spinner
     }()
     
+    //MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemBackground
@@ -91,6 +95,7 @@ final class RMLocationView: UIView {
         self.viewModel = viewModel
     }
 }
+//MARK: - UITableview Delegate
 
 extension RMLocationView: UITableViewDelegate, UITableViewDataSource {
     
@@ -121,6 +126,8 @@ extension RMLocationView: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+ //MARK: - UIScrollview Delegate
+
 extension RMLocationView: UIScrollViewDelegate{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let viewModel = viewModel, !viewModel.cellViewModels.isEmpty,
@@ -134,9 +141,9 @@ extension RMLocationView: UIScrollViewDelegate{
             let totalScrollViewFixedHeight = scrollView.frame.size.height
             
             if offset >= (totalConstentHeight - totalScrollViewFixedHeight - 120){
-                DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: .now()+0.3, execute: {
                     self?.showLoadingIndicator()
-                }
+                })
                 viewModel.fetchAdditionalLocations()
             }
             t.invalidate()
@@ -148,5 +155,7 @@ extension RMLocationView: UIScrollViewDelegate{
                                                             width: frame.size.width,
                                                             height: 100))
         tableView.tableFooterView = footer
+        tableView.setContentOffset(CGPoint(x: 0,
+                                           y: tableView.contentSize.height), animated: true)
     }
 }
